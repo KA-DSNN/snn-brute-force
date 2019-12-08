@@ -1,0 +1,11 @@
+#!/bin/bash
+# Home directory
+export SBF_HOME=/home/mzp7/workspace/DSNN/snn-brute-force
+
+# Docker build
+export BUILD_DIR=$SBF_HOME
+export DOCKERFILE=$SBF_HOME/Dockerfile
+export VERSION="0.0.1-alpha"
+
+# Path configuration
+export PATH=$PATH:$SBF_HOME

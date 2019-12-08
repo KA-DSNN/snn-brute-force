@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "SNN Brute Force Util (v $VERSION)"
+echo ""
+
+help_print () {
+    echo "Usage: snn-brute-force <command>"
+}
+
+build_container () {
+    docker build -t snn-brute-force:$VERSION -f Dockerfile .
+}
+
+op=$1
+
+if [ $op == "build" ]
+then
+    build_container
+else 
+    help_print
+fi
