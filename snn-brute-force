@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source ./app/config/env
 echo "SNN Brute Force Util (v $VERSION)"
 echo ""
 
@@ -11,11 +12,29 @@ build_container () {
     docker build -t snn-brute-force:$VERSION -f Dockerfile .
 }
 
+run_on_machine () {
+    source /opt/anaconda/bin/activate
+    conda activate ./cenv
+    cd $APP_DIR/src
+    python app.py
+    cd $SBF_HOME
+}
+
+run_container () {
+    docker run snn-brute-force:$VERSION
+}
+
 op=$1
 
 if [ $op == "build" ]
 then
     build_container
+elif [ $op == "mrun" ]
+then
+    run_on_machine
+elif [ $op == "crun" ]
+then
+    run_container
 else 
     help_print
 fi
