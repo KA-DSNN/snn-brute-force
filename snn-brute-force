@@ -4,8 +4,22 @@ source ./app/config/env
 echo "SNN Brute Force Util (v $VERSION)"
 echo ""
 
+declare -a commands=(
+  "build" "Build the snn-brute-force container"
+  "mrun"  "Run program on host machine"
+  "crun" "Run the container"
+)
+
 help_print () {
     echo "Usage: snn-brute-force <command>"
+    echo ""
+    echo "commands:"
+
+    arraylength=${#commands[@]}
+    for (( i = 0; i < ${arraylength}; i += 2 ));
+    do
+        echo -e "\t" ${commands[$i]} "\t\t- " ${commands[$i+1]}
+    done
 }
 
 build_container () {
