@@ -16,7 +16,7 @@ def generate_network(
         output_path = os.path.join(os.environ["OUTPUT_PATH"], "out")
 ):
     num_inputs = 0
-    if type(inputs) is list and len(inputs) > 0 and type(inputs[0]) is list:
+    if type(inputs) is np.ndarray and len(inputs) > 0 and type(inputs[0]) is np.ndarray:
         num_inputs = len(inputs[0])
     else:
         exit(0)
@@ -41,12 +41,16 @@ def generate_network(
         # And we have num_tau output neurons, each with a different tau
         G = NeuronGroup(num_tau, eqs, threshold='v>1', reset='v=0', method='exact')
         G.tau = tau_range
-        SS = Synapses(G, G, on_pre='v += weight')
+        G.I = I
+        SS = Synapses(G, G, on_pre='v += (weight + randn())')
         SS.connect()
 
         for i in range(0, num_inputs):
-            P = PoissonGroup(7, rates=sample[i] * input_rate)
-            S = Synapses(P, G, on_pre="v += .4")
+            P = PoissonGroup(
+                1,
+                rates= sample[i] * input_rate
+            )
+            S = Synapses(P, G, on_pre="v += .2")
             S.connect()
 
         M = SpikeMonitor(G)
@@ -63,23 +67,9 @@ def generate_network(
             neuron_fire_d[fire_point][s_index] += 1
             index += 1
 
-        plot(M.t/ms, M.i, '.k', ms=3)
-        xlabel('Time (ms)')
-        ylabel('Neuron index')
-
-        savefig(
-            os.path.join(
-                output_path,
-                "{}-{}.png".format(name, sample_count)
-            )
-        )
-
         sample_count += 1
         result.append({
             "sample": sample,
             "fire_rate": neuron_fire_d,
         })
     return result
-
-if __name__ == "__main__":
-    generate_network([[5.6,2.8,4.9,2.0]])
