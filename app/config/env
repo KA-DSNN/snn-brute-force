@@ -1,25 +1,28 @@
 #!/bin/bash
 # Home directory
-# Dockerfile set SBF_HOME variable 
-if [ -z "$SBF_HOME" ]
+# Dockerfile set SFG_HOME variable
+if [ -z "$SFG_HOME" ]
 then
     export CONTAINER="false"
-    export SBF_HOME=/home/mzp7/workspace/DSNN/snn-feature-generator
+    export SFG_HOME=/home/mzp7/workspace/DSNN/snn-feature-generator
 else
     export CONTAINER="true"
-    export SBF_HOME=$SBF_HOME
+    export SFG_HOME=$SFG_HOME
 fi
 
 # Docker build
-export BUILD_DIR=$SBF_HOME
-export DOCKERFILE=$SBF_HOME/Dockerfile
+export BUILD_DIR=$SFG_HOME
+export DOCKERFILE=$SFG_HOME/Dockerfile
 export VERSION="0.1.0-alpha"
 
 # Path configuration
-export PATH=$PATH:$SBF_HOME
+export PATH=$PATH:$SFG_HOME
+
+# Dependencies
 
 # Main python script
-export APP_DIR=$SBF_HOME/app
-export APP=$SBF_HOME/app/src/app.py
-export DATA_PATH=$SBF_HOME/data
-export OUTPUT_PATH=$SBF_HOME/output
+export APP_DIR=$SFG_HOME/app
+export APP=$SFG_HOME/app/src/app.py
+export DATA_PATH=$SFG_HOME/data
+export OUTPUT_PATH=$SFG_HOME/output
+export CONFIG_DIR=$APP_DIR/config

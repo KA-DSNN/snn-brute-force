@@ -2,6 +2,9 @@
 On going project
 
 ## snn-feature-generator usage
+### Setup the environment
+```snn-feature-generator setup``` command will create a conda environment in working directory
+
 ### Build container 
 ```snn-feature-generator build``` command will create docker container on your system.
 

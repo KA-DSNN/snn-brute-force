@@ -6,7 +6,6 @@ from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
 from setuptools.sandbox import save_argv
-from sympy import harmonic
 from tensorflow import keras
 from brian2 import *
 from random import random
@@ -72,13 +71,16 @@ result = generate_network(
 # And using the trained ANN we will do binary classification on test data
 
 input_layer_N_num = (run_time / part_length) * G_N_number
-hidden_layer_N_num = ((run_time / part_length) - 1) or 2
+hidden_layer_N_num = 30 #((run_time / part_length) - 1) or 2
 output_layer_N_num = 2 # Generic output configuration will be implemented
 
 function(
     result,
     data[:, -1],
-    output_path
+    output_path,
+    input_layer_N_num=input_layer_N_num,
+    hidden_layer_N_num=hidden_layer_N_num,
+    output_layer_N_num=output_layer_N_num
 )
 
 count = 0

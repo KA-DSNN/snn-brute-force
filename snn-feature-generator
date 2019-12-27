@@ -8,6 +8,7 @@ declare -a commands=(
   "build" "Build the snn-feature-generator container"
   "mrun"  "Run program on host machine"
   "crun" "Run the container"
+  "setup" "Setup the environment"
 )
 
 help_print () {
@@ -31,24 +32,35 @@ run_on_machine () {
     conda activate ./cenv
     cd $APP_DIR/src
     python app.py
-    cd $SBF_HOME
+    cd $SFG_HOME
 }
 
 run_container () {
     docker run snn-feature-generator:$VERSION
 }
 
+setup () {
+    source /opt/anaconda/bin/activate
+    conda create -p ./cenv
+    conda activate cenv/
+    conda install -c conda-forge --file $CONFIG_DIR/conda.req.list
+    pip install -r $CONFIG_DIR/pip.req.list --no-cache-dir
+}
+
 op=$1
 
-if [ $op == "build" ]
+if [ $op = "build" ]
 then
     build_container
-elif [ $op == "mrun" ]
+elif [ $op = "mrun" ]
 then
     run_on_machine
-elif [ $op == "crun" ]
+elif [ $op = "crun" ]
 then
     run_container
+elif [ $op = "setup" ]
+then
+    setup
 else 
     help_print
 fi

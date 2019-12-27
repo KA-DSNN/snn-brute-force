@@ -28,9 +28,6 @@ def function(
     snn_results_x = list(map(lambda x: x["fire_rate"].ravel(), snn_results))
     snn_results_x = np.vstack(snn_results_x)
 
-    print(snn_results[0]["fire_rate"])
-    print(snn_results_x)
-
     X_train, X_test, y_train, y_test = train_test_split(
         snn_results_x,
         labels,
@@ -38,7 +35,7 @@ def function(
         random_state = 42
     )
 
-    model.fit(X_train, y_train, batch_size=1000, epochs=1000, verbose=2)
+    model.fit(X_train, y_train, batch_size=1000, epochs=1000, verbose=0)
     model.save(
         os.path.join(output_path, "ann-model.h5")
     )

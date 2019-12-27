@@ -1,6 +1,6 @@
 FROM tensorflow/tensorflow:latest-gpu-py3
 
-ENV SBF_HOME=""
+ENV SFG_HOME=""
 
 ADD app/ /app
 
