@@ -1,17 +1,17 @@
 #!/bin/bash
 
 source ./app/config/env
-echo "SNN Brute Force Util (v $VERSION)"
+echo "SNN Feature Generator Util (v $VERSION)"
 echo ""
 
 declare -a commands=(
-  "build" "Build the snn-brute-force container"
+  "build" "Build the snn-feature-generator container"
   "mrun"  "Run program on host machine"
   "crun" "Run the container"
 )
 
 help_print () {
-    echo "Usage: snn-brute-force <command>"
+    echo "Usage: snn-feature-generator <command>"
     echo ""
     echo "commands:"
 
@@ -23,7 +23,7 @@ help_print () {
 }
 
 build_container () {
-    docker build -t snn-brute-force:$VERSION -f Dockerfile .
+    docker build -t snn-feature-generator:$VERSION -f Dockerfile .
 }
 
 run_on_machine () {
@@ -35,7 +35,7 @@ run_on_machine () {
 }
 
 run_container () {
-    docker run snn-brute-force:$VERSION
+    docker run snn-feature-generator:$VERSION
 }
 
 op=$1
