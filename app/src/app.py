@@ -42,7 +42,7 @@ def save_heatmap(
 # Output directory control
 # output_path = os.path.join(os.environ["OUTPUT_PATH"])
 
-output_path = "../output/iris.6.out"
+output_path = "../output/iris.7.out"
 if not os.path.isdir(output_path):
     os.makedirs(output_path)
 

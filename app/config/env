@@ -4,7 +4,7 @@
 if [ -z "$SBF_HOME" ]
 then
     export CONTAINER="false"
-    export SBF_HOME=/home/mzp7/workspace/DSNN/snn-brute-force
+    export SBF_HOME=/home/mzp7/workspace/DSNN/snn-feature-generator
 else
     export CONTAINER="true"
     export SBF_HOME=$SBF_HOME
