@@ -1,0 +1,12 @@
+# Virtual environment
+cenv
+
+# Outputs
+app/output
+
+# IDE directory
+.vscode
+.idea
+
+# pycache
+app/src/__pycache__
